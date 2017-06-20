@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.FlowController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.6822742474916388" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Canvas height="550.0" onMouseClicked="#canvasMouseClick" onMouseDragged="#canvasMouseClick" width="600.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ButtonBar layoutX="-7.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.topAnchor="0.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#handleStartButton" text="Start" />
+                        <Button mnemonicParsing="false" onAction="#handlePauseButton" text="Pause" />
+                        <Button mnemonicParsing="false" onAction="#handleStopButton" text="Stop" />
+                    </buttons>
+                  </ButtonBar>
+                  <Slider fx:id="speedBar" layoutX="9.0" layoutY="94.0" max="10.0" min="1.0" prefHeight="18.0" prefWidth="242.0" />
+                  <Label layoutX="6.0" layoutY="54.0" text="Speed" />
+                  <TextField fx:id="widthField" layoutX="33.0" layoutY="154.0" prefHeight="31.0" prefWidth="61.0" />
+                  <TextField layoutX="141.0" layoutY="154.0" prefHeight="31.0" prefWidth="61.0" />
+                  <Label layoutX="15.0" layoutY="159.0" text="X" />
+                  <Label layoutX="121.0" layoutY="159.0" text="Y" />
+                  <Label layoutX="6.0" layoutY="120.0" text="Size" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
