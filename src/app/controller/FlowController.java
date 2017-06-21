@@ -2,24 +2,18 @@ package app.controller;
 
 import app.MainApp;
 
-import app.model.BoardObserver;
 import app.model.GameOfLife;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
-
-import java.awt.*;
-import java.nio.Buffer;
 
 public class FlowController {
     private MainApp mainApp;
@@ -28,12 +22,15 @@ public class FlowController {
     private double scaleX;
     private double scaleY;
     private Timeline timeline;
+    private int iterationsCounter=0;
 
 
     @FXML
     private TextField widthField;
     @FXML
     private Slider speedBar;
+    @FXML
+    private Text textIterations;
 
     @FXML
     private void handleStartButton() {
@@ -48,6 +45,7 @@ public class FlowController {
         timeline.stop();
         gameOfLife.clearBoard();
         paintBoard();
+        updateCounter(0);
     }
 
     @FXML
@@ -58,6 +56,14 @@ public class FlowController {
         gc.fillRect(x, y, scaleX, scaleY);
         gameOfLife.setField((int) Math.round(x / scaleX), (int) Math.round(y / scaleY), true);
     }
+    @FXML
+    private void onClose(){
+        Platform.exit();
+    }
+    @FXML private void onClear(){
+        gameOfLife.clearBoard();
+        paintBoard();
+    }
 
 
 
@@ -65,9 +71,12 @@ public class FlowController {
         timeline = new Timeline(new KeyFrame(Duration.millis(500 / speedBar.getValue()), event -> {
             gameOfLife.updateBoard();
             paintBoard();
+            updateCounter(1);
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
+
+
     }
 
     private void paintBoard() {
@@ -77,8 +86,11 @@ public class FlowController {
                 gc.fillRect((i % gameOfLife.width) * scaleX, (i / gameOfLife.height) * scaleY, scaleX, scaleY);
 
 
-
         gc.setFill(Color.RED);
+    }
+    private void updateCounter(int n){
+        iterationsCounter=(iterationsCounter+n)*n;
+        textIterations.setText(Integer.toString(iterationsCounter));
     }
 
     public void calculateScale() {

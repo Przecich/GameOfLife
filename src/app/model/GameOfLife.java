@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GameOfLife {
-    public int width = 50;
-    public int height = 50;
+    public int width = 100;
+    public int height = 100;
     public List<Boolean> board = new ArrayList<>(Collections.nCopies(width * height, false));
     //TODO: change to proper values of either height or width
     private int[] offsets = new int[]{-1, 1, -height, -(height - 1), -(height + 1), height - 1, height + 1, height};
@@ -14,7 +14,7 @@ public class GameOfLife {
 
     public void updateBoard() {
         board = IntStream.range(0, board.size())
-                .mapToObj(i -> isAlive(i))
+                .mapToObj(this::isAlive)
                 .collect(Collectors.toList());
     }
 
@@ -34,7 +34,7 @@ public class GameOfLife {
         return Arrays
                 .stream(offsets)
                 .mapToObj(x -> board.get(convertToPeriodic(field, x)))
-                .filter(p -> p == true).count();
+                .filter(p -> p).count();
     }
 
     private int convertToPeriodic(int field, int offset) {

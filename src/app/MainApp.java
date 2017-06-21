@@ -28,7 +28,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
+        this.primaryStage.setTitle("Game of Life");
 
         initRootLayout();
 
@@ -41,12 +41,12 @@ public class MainApp extends Application {
 
     }
 
-    public void initRootLayout() {
+    private void initRootLayout() {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/GameOfLifeGUI.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
 
             SplitPane splitPane=(SplitPane) rootLayout.getCenter();
             AnchorPane anchorPane=(AnchorPane)splitPane.getItems().get(0);
